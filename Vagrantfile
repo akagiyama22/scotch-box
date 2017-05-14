@@ -10,5 +10,14 @@ Vagrant.configure("2") do |config|
     
     # Optional NFS. Make sure to remove other synced_folder line too
     #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
+    # case fuelphp
+    config.vm.synced_folder "../", "/var/www/", :owner => "vagrant", :group => "vagrant"
+
+    config.vm.provision "shell", path: "scripts/install_php_7.sh"
+    config.vm.provision "shell", path: "scripts/upgrade_mysql_to_56.sh"
+    config.vm.provision "shell", path: "scripts/install_phpmyadmin.sh"
+
+	# config.vm.provision "shell", inline: <<-SHELL
+	SHELL
 
 end
